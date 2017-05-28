@@ -33,12 +33,18 @@ namespace MvvmCross.iOS.Support.XamarinSidebarSample.iOS.Views
             var exampleButton = new UIButton(new CGRect(0, 100, 320, 40));
             exampleButton.SetTitle("Example Menu Item", UIControlState.Normal);
             exampleButton.BackgroundColor = UIColor.White;
-            exampleButton.SetTitleColor(UIColor.Black, UIControlState.Normal);
+			exampleButton.SetTitleColor(UIColor.Black, UIControlState.Normal);
+
+			var logoutButton = new UIButton(new CGRect(0, 100, 320, 40));
+			logoutButton.SetTitle("Logout", UIControlState.Normal);
+			logoutButton.BackgroundColor = UIColor.White;
+			logoutButton.SetTitleColor(UIColor.Black, UIControlState.Normal);
 
 
             var bindingSet = this.CreateBindingSet<LeftPanelView, LeftPanelViewModel>();
             bindingSet.Bind(exampleButton).To(vm => vm.ShowExampleMenuItemCommand);
-            bindingSet.Bind(centerButton).To(vm => vm.ShowMasterViewCommand);
+			bindingSet.Bind(centerButton).To(vm => vm.ShowMasterViewCommand);
+            bindingSet.Bind(logoutButton).To(vm => vm.LogoutCommand);
             bindingSet.Apply();
 
             var scrollView = new UIScrollView(View.Frame)
@@ -56,7 +62,7 @@ namespace MvvmCross.iOS.Support.XamarinSidebarSample.iOS.Views
                 scrollView.WithSameWidth(View),
                 scrollView.WithSameHeight(View));
 
-            scrollView.AddSubviews(centerButton, exampleButton);
+            scrollView.AddSubviews(centerButton, exampleButton, logoutButton);
 
             View.SubviewsDoNotTranslateAutoresizingMaskIntoConstraints();
 

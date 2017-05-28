@@ -45,6 +45,7 @@
     <Compile Include="ViewModels\LeftPanelViewModel.cs" />
     <Compile Include="ViewModels\MasterViewModel.cs" />
     <Compile Include="ViewModels\RightPanelViewModel.cs" />
+    <Compile Include="ViewModels\LoginViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\..\MvvmCross\Core\Binding\MvvmCross.Binding.csproj">

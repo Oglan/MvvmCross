@@ -34,6 +34,22 @@ namespace MvvmCross.iOS.Support.XamarinSidebarSample.Core.ViewModels
         private void ShowMasterView()
         {
             ShowViewModel<MasterViewModel>();
-        }
+		}
+
+		private MvxCommand _logoutCommand;
+
+		public MvxCommand LogoutCommand
+		{
+			get
+			{
+				_logoutCommand = _logoutCommand ?? new MvxCommand(Logout);
+				return _logoutCommand;
+			}
+		}
+
+		private void Logout()
+		{
+            ShowViewModel<LoginViewModel>();
+		}
     }
 }
