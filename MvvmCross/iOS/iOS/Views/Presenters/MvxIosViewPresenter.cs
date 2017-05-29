@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using CoreAnimation;
 using MvvmCross.Core.ViewModels;
 using MvvmCross.iOS.Views.Presenters.Attributes;
 using MvvmCross.Platform.Exceptions;
@@ -374,14 +373,6 @@ namespace MvvmCross.iOS.Views.Presenters
             foreach (var item in (SplitViewController as UISplitViewController).ViewControllers)
                 item.DidMoveToParentViewController(null);
             SplitViewController = null;
-        }
-
-        protected virtual void ChangeWindowRootViewController(UIViewController controller)
-        {
-            foreach (var v in _window.Subviews)
-                v.RemoveFromSuperview();
-            _window.AddSubview(controller.View);
-            _window.RootViewController = controller;
         }
 
         protected virtual void SetWindowRootViewController(UIViewController controller)

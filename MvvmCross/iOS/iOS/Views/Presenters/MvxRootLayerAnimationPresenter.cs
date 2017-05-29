@@ -24,10 +24,7 @@ namespace MvvmCross.iOS.Views.Presenters
 
         public override void SetWindowRootViewController(UIKit.UIWindow window, UIKit.UIViewController controller)
         {
-            UIView.BeginAnimations("transition");
-            window.Layer.AddAnimation(_animation, "transition");
-            UIView.CommitAnimations();
-
+            window.Layer.AddAnimation(_animation, null);
             base.SetWindowRootViewController(window, controller);
         }
     }
