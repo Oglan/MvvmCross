@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using CoreAnimation;
 using MvvmCross.Core.ViewModels;
 using MvvmCross.iOS.Views.Presenters.Attributes;
 using MvvmCross.Platform.Exceptions;
@@ -14,6 +15,7 @@ namespace MvvmCross.iOS.Views.Presenters
         protected readonly IUIApplicationDelegate _applicationDelegate;
         protected readonly UIWindow _window;
         protected Dictionary<Type, Action<UIViewController, MvxBasePresentationAttribute, MvxViewModelRequest>> _attributeTypesToShowMethodDictionary;
+        protected readonly MvxRootPresenter _defaultRootPresenter;
 
         public UINavigationController MasterNavigationController { get; protected set; }
 
@@ -29,6 +31,8 @@ namespace MvvmCross.iOS.Views.Presenters
             _window = window;
 
             _attributeTypesToShowMethodDictionary = new Dictionary<Type, Action<UIViewController, MvxBasePresentationAttribute, MvxViewModelRequest>>();
+
+            _defaultRootPresenter = new MvxRootPresenter();
 
             RegisterAttributeTypes();
         }
@@ -372,13 +376,36 @@ namespace MvvmCross.iOS.Views.Presenters
             SplitViewController = null;
         }
 
-        protected virtual void SetWindowRootViewController(UIViewController controller)
+        protected virtual void ChangeWindowRootViewController(UIViewController controller)
         {
             foreach (var v in _window.Subviews)
                 v.RemoveFromSuperview();
-
             _window.AddSubview(controller.View);
             _window.RootViewController = controller;
+        }
+
+        protected virtual void SetWindowRootViewController(UIViewController controller)
+        {
+            var targetAttribute = GetAnimationAttribute(controller);
+            var sourceAttribute = GetAnimationAttribute(_window.RootViewController);
+
+            var presenter = targetAttribute?.GetToPresenter()
+                         ?? sourceAttribute?.GetFromPresenter()
+                         ?? targetAttribute?.GetFromPresenter()
+                         ?? sourceAttribute?.GetToPresenter()
+                         ?? _defaultRootPresenter;
+
+            presenter.SetWindowRootViewController(_window, controller);
+        }
+
+        public MvxAnimatedRootTransitionAttribute GetAnimationAttribute(UIViewController controller)
+        {
+            if (controller == null)
+                return null;
+
+            return controller.GetType()
+                             .GetCustomAttributes(typeof(MvxAnimatedRootTransitionAttribute), true)
+                             .FirstOrDefault() as MvxAnimatedRootTransitionAttribute;
         }
 
         protected MvxBasePresentationAttribute GetPresentationAttributes(UIViewController viewController)

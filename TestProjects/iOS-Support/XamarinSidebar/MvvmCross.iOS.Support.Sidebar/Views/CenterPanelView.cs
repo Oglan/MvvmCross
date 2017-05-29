@@ -10,7 +10,7 @@ namespace MvvmCross.iOS.Support.XamarinSidebarSample.iOS.Views
 
     [Register("CenterPanelView")]
     [MvxSidebarPresentation(MvxPanelEnum.Center, MvxPanelHintType.ResetRoot, true)]
-    public class CenterPanelView : BaseViewController<CenterPanelViewModel>
+	public class CenterPanelView : BaseViewController<CenterPanelViewModel>
     {
         /// <summary>
         /// Called after the controller’s <see cref="P:UIKit.UIViewController.View"/> is loaded into memory.

@@ -76,7 +76,6 @@
     <Compile Include="Views\MvxNavigationController.cs" />
     <Compile Include="Views\UIViewControllerExtensionMethods.cs" />
     <Compile Include="Views\Presenters\Attributes\MvxModalPresentationAttribute.cs" />
-    <Compile Include="Views\Presenters\Attributes\MvxBasePresentationAttribute.cs" />
     <Compile Include="Views\Presenters\Attributes\MvxRootPresentationAttribute.cs" />
     <Compile Include="Views\Presenters\Attributes\MvxChildPresentationAttribute.cs" />
     <Compile Include="Views\Presenters\Attributes\MvxTabPresentationAttribute.cs" />
@@ -89,6 +88,12 @@
     <Compile Include="Views\MvxEventSourceSplitViewController.cs" />
     <Compile Include="Views\MvxSplitViewController.cs" />
     <Compile Include="Views\IMvxTabBarItemViewController.cs" />
+    <Compile Include="Views\Presenters\MvxTransitionType.cs" />
+    <Compile Include="Views\Presenters\Attributes\MvxAnimatedRootTransitionAttribute.cs" />
+    <Compile Include="Views\Presenters\MvxRootPresenter.cs" />
+    <Compile Include="Views\Presenters\MvxRootViewTransitionPresenter.cs" />
+    <Compile Include="Views\Presenters\MvxRootLayerAnimationPresenter.cs" />
+    <Compile Include="Views\Presenters\Attributes\MvxBasePresentationAttribute.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Interfaces\" />
